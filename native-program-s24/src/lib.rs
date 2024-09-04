@@ -10,23 +10,23 @@ use solana_program::{
     sysvar::Sysvar,
 };
 
-// Define the structure for our account data
+
 #[derive(Clone, Debug, Default, PartialEq)]
 struct AccountState {
     balance: u64,
     last_withdrawal_time: i64,
 }
 
-// Declare and export the program's entrypoint
+
 entrypoint!(process_instruction);
 
-// Program entrypoint's implementation
+
 pub fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
-    // Verify the account list
+ 
     if accounts.len() < 2 {
         return Err(solana_program::program_error::ProgramError::InvalidAccountData.into());
     }
@@ -35,7 +35,7 @@ pub fn process_instruction(
     let account = next_account_info(account_info_iter)?;
     let payer = next_account_info(account_info_iter)?;
 
-    // Read the instruction data to determine which operation to perform
+
     match instruction_data[0] {
         0 => initialize_account(account, payer),
         1 => deposit(account, payer, &instruction_data[1..]),
@@ -80,7 +80,7 @@ fn withdraw(account: &AccountInfo, receiver: &AccountInfo) -> ProgramResult {
         return Err(solana_program::program_error::ProgramError::InvalidAccountData.into());
     }
 
-    let withdraw_amount = account_state.balance / 10; // 10% of the balance
+    let withdraw_amount = account_state.balance / 10; 
     **account.lamports.borrow_mut() -= withdraw_amount;
     **receiver.lamports.borrow_mut() += withdraw_amount;
 
