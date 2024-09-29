@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, TokenAccount, Transfer};
 
-declare_id!("");
+declare_id!("XmcCbXdm8jxywfH6c1mBPiF6McVGqmpNb7vLFYAC2be");
 
 #[program]
 pub mod asset_manager_vault {
